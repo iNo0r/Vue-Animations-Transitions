@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="block"></div>
-    <button>Animate</button>
+    <!-- to annimate the block whenever animateBlock is true -->
+    <div class="block" :class="{ animate: animatedBlock }"></div>
+    <button @click="animateBlock">Animate</button>
   </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
     <p>This is a test dialog!</p>
@@ -10,12 +11,12 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
-</template>  
+</template>
 
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false };
+    return { dialogIsVisible: false, animatedBlock:false };
   },
   methods: {
     showDialog() {
@@ -24,7 +25,10 @@ export default {
     hideDialog() {
       this.dialogIsVisible = false;
     },
-  },
+    animateBlock() {
+      this.animatedBlock = true;
+    }
+  }
 };
 </script>
 
@@ -57,6 +61,11 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
+  /* here we specify wich propery to be transited */
+  /* all for all  */
+  /* transition: all; */
+  /* so when ever transform triggered the transition will fire  */
+  transition: transform 0.3s;
 }
 .container {
   max-width: 40rem;
@@ -68,5 +77,11 @@ button:active {
   padding: 2rem;
   border: 2px solid #ccc;
   border-radius: 12px;
+}
+
+.animate {
+  /* transofrom is a css property */
+  /* it will only move the object from a place to another without transition */
+  transform: translateX(-150px);
 }
 </style>

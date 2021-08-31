@@ -5,7 +5,7 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para"> 
+    <transition name="para">
       <p v-if="paraIsVisible">the is only sometimes visible.</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragrapho</button>
@@ -74,11 +74,6 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
-  /* here we specify wich propery to be transited */
-  /* all for all  */
-  /* transition: all; */
-  /* so when ever transform triggered the transition will fire  */
-  /* transition: transform 0.3s ease-out; */
 }
 .container {
   max-width: 40rem;
@@ -93,44 +88,19 @@ button:active {
 }
 
 .animate {
-  /* transofrom is a css property */
-  /* it will only move the object from a place to another without transition */
-  /* transform: translateX(-150px); */
   /* here we refer to the css keyframe set name, which is slide-fade */
   /* if we dont add "forwards" it will it will not freeze at at last animation point */
   animation: slide-fade 0.3s ease-out forwards;
 }
 
-/* .v-enter-from {
-  opacity: 0;
-  transform: translateY(-30px);
-} */
 .para-enter-active {
-  /* transition is the function who is gonne be firing the 
-  animation methods which is in our case "transform" but set all 
-  to watch all type of transitions */
-  /* transition: all 0.3s ease-out; */
-
   /* binding it with keyframes  */
   animation: slide-fade 0.3s ease-out;
 }
-/* .v-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-} */
-/* for v-leave you dont have to use the same, but you can ofcourse  */
-/* .v-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-} */
+
 .para-leave-active {
-  /* transition: all 0.3s ease-in; */
   animation: slide-fade 0.3s ease-out;
 }
-/* .v-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-} */
 
 /* slide-name is just a name, you can change it */
 @keyframes slide-fade {

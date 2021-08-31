@@ -47,6 +47,11 @@ dialog {
   animation: modal-keyframes 0.5s ease-out;
 }
 
+.modal-leave-active {
+  /* we add the reverse becaused we used to the same keyframes  */
+  animation: modal-keyframes 0.5s ease-in reverse;
+}
+
 @keyframes modal-keyframes {
   /* if you are defining two states you can replace the 0% with "from" 
   and 100% with "to" */

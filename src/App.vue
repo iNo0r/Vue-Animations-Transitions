@@ -11,7 +11,9 @@
     <button @click="toggleParagraph">Toggle Paragrapho</button>
   </div>
   <div class="container">
-    <transition name="fade-button">
+    <!-- we ad the mode to prevent showing ugly transitoin when 2 elements 
+    animating at the same time  -->
+    <transition name="fade-button" mode="out-in">
       <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
       <!-- we added v-else here to notify vue that we only using one child inside 
       of a Transistion component -->
@@ -105,7 +107,7 @@ button:active {
 }
 
 .fade-button-enter-from,
-.fade-button-leave-to  {
+.fade-button-leave-to {
   opacity: 0;
 }
 .fade-button-enter-active {

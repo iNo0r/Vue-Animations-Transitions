@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  emits: ['close'],
+  emits: ['close']
 };
 </script>
 
@@ -48,7 +48,6 @@ dialog {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-
   }
 }
 </style>

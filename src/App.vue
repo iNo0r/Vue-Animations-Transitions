@@ -101,32 +101,36 @@ button:active {
   animation: slide-fade 0.3s ease-out forwards;
 }
 
-.v-enter-from {
+/* .v-enter-from {
   opacity: 0;
   transform: translateY(-30px);
-}
+} */
 .v-enter-active {
   /* transition is the function who is gonne be firing the 
   animation methods which is in our case "transform" but set all 
   to watch all type of transitions */
-  transition: all 0.3s ease-out;
-}
-.v-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
+  /* transition: all 0.3s ease-out; */
 
-.v-leave-from {
+  /* binding it with keyframes  */
+  animation: slide-fade 0.3s ease-out;
+}
+/* .v-enter-to {
   opacity: 1;
   transform: translateY(0);
-}
+} */
+/* for v-leave you dont have to use the same, but you can ofcourse  */
+/* .v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+} */
 .v-leave-active {
-  transition: all 0.3s ease-in;
+  /* transition: all 0.3s ease-in; */
+  animation: slide-fade 0.3s ease-out;
 }
-.v-leave-to {
+/* .v-leave-to {
   opacity: 0;
   transform: translateY(30px);
-}
+} */
 
 /* slide-name is just a name, you can change it */
 @keyframes slide-fade {

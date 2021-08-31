@@ -4,6 +4,12 @@
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
+  <div class="container">
+    <transition>
+      <p v-if="paraIsVisible">the is only sometimes visible.</p>
+    </transition>
+    <button @click="toggleParagraph">Toggle Paragrapho</button>
+  </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -16,9 +22,16 @@
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false, animatedBlock: false };
+    return {
+      dialogIsVisible: false,
+      animatedBlock: false,
+      paraIsVisible: false
+    };
   },
   methods: {
+    toggleParagraph() {
+      this.paraIsVisible = !this.paraIsVisible;
+    },
     showDialog() {
       this.dialogIsVisible = true;
     },
@@ -86,6 +99,21 @@ button:active {
   /* here we refer to the css keyframe set name, which is slide-fade */
   /* if we dont add "forwards" it will it will not freeze at at last animation point */
   animation: slide-fade 0.3s ease-out forwards;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.v-enter-active{
+  /* transition is the function who is gonne be firing the 
+  animation methods which is in our case "transform" but set all 
+  to watch all type of transitions */
+  transition: all 0.3s ease-out;
+}
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* slide-name is just a name, you can change it */

@@ -16,7 +16,7 @@
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false, animatedBlock:false };
+    return { dialogIsVisible: false, animatedBlock: false };
   },
   methods: {
     showDialog() {
@@ -65,7 +65,7 @@ button:active {
   /* all for all  */
   /* transition: all; */
   /* so when ever transform triggered the transition will fire  */
-  transition: transform 0.3s;
+  /* transition: transform 0.3s ease-out; */
 }
 .container {
   max-width: 40rem;
@@ -82,6 +82,25 @@ button:active {
 .animate {
   /* transofrom is a css property */
   /* it will only move the object from a place to another without transition */
-  transform: translateX(-150px);
+  /* transform: translateX(-150px); */
+  /* here we refer to the css keyframe set name, which is slide-fade */
+  /* if we dont add "forwards" it will it will not freeze at at last animation point */
+  animation: slide-fade 0.3s ease-out forwards;
+}
+
+/* slide-name is just a name, you can change it */
+@keyframes slide-fade {
+  /* at 0 of animation time  */
+  0% {
+    transform: translateX(0px) scale(1);
+  }
+  /* at 70% of animation time  */
+  /* scale(1.1) means 10% bigger */
+  70% {
+    transform: translateX(-120px) scale(1.1);
+  }
+  100% {
+    transform: translateX(-150px) scale(1);
+  }
 }
 </style>

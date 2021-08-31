@@ -5,7 +5,7 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition>
+    <transition name="para"> 
       <p v-if="paraIsVisible">the is only sometimes visible.</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragrapho</button>
@@ -105,7 +105,7 @@ button:active {
   opacity: 0;
   transform: translateY(-30px);
 } */
-.v-enter-active {
+.para-enter-active {
   /* transition is the function who is gonne be firing the 
   animation methods which is in our case "transform" but set all 
   to watch all type of transitions */
@@ -123,7 +123,7 @@ button:active {
   opacity: 1;
   transform: translateY(0);
 } */
-.v-leave-active {
+.para-leave-active {
   /* transition: all 0.3s ease-in; */
   animation: slide-fade 0.3s ease-out;
 }

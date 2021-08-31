@@ -10,7 +10,9 @@
     </transition>
     <button @click="toggleParagraph">Toggle Paragrapho</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <!-- it is important that the content of the an element is the one is not visible, 
+  if the <transistion> itslef is not visble the effect wont work -->
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>

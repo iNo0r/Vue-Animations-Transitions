@@ -1,13 +1,18 @@
 <template>
-  <div class="backdrop" @click="$emit('close')"></div>
-  <dialog class="" open>
-    <slot></slot>
-  </dialog>
+  <div v-if="open" class="backdrop" @click="$emit('close')"></div>
+  <!-- the name given to the transition will be used to point to this specific
+  transition, to add animation "modal-enter-to" -->
+  <transition name="modal">
+    <dialog class="" open v-if="open">
+      <slot></slot>
+    </dialog>
+  </transition>
 </template>
 
 <script>
 export default {
-  emits: ['close']
+  props:['open'],
+  emits: ['close',]
 };
 </script>
 
@@ -34,10 +39,15 @@ dialog {
   background-color: white;
   z-index: 100;
   border: none;
-  animation: modal 0.6s ease-out forwards;
+  /* animation: modal 0.6s ease-out forwards; */
 }
 
-@keyframes modal {
+/* we did not define the to and from here because the keyframes will handle it for us */
+.modal-enter-active {
+  animation: modal-keyframes 0.5s ease-out;
+}
+
+@keyframes modal-keyframes {
   /* if you are defining two states you can replace the 0% with "from" 
   and 100% with "to" */
   from {

@@ -10,6 +10,14 @@
     </transition>
     <button @click="toggleParagraph">Toggle Paragrapho</button>
   </div>
+  <div class="container">
+    <transition name="fade-button">
+      <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
+      <!-- we added v-else here to notify vue that we only using one child inside 
+      of a Transistion component -->
+      <button @click="hideUsers" v-else>Hide Users</button>
+    </transition>
+  </div>
   <!-- it is important that the content of the an element is the one is not visible, 
   if the <transistion> itslef is not visble the effect wont work -->
   <base-modal @close="hideDialog" :open="dialogIsVisible">
@@ -27,10 +35,17 @@ export default {
     return {
       dialogIsVisible: false,
       animatedBlock: false,
-      paraIsVisible: false
+      paraIsVisible: false,
+      usersAreVisible: false
     };
   },
   methods: {
+    showUsers() {
+      this.usersAreVisible = true;
+    },
+    hideUsers() {
+      this.usersAreVisible = false;
+    },
     toggleParagraph() {
       this.paraIsVisible = !this.paraIsVisible;
     },
@@ -87,6 +102,21 @@ button:active {
   padding: 2rem;
   border: 2px solid #ccc;
   border-radius: 12px;
+}
+
+.fade-button-enter-from,
+.fade-button-leave-to  {
+  opacity: 0;
+}
+.fade-button-enter-active {
+  transition: opacity 0.5s ease-out;
+}
+.fade-button-leave-active {
+  transition: opacity 0.5s ease-in;
+}
+.fade-button-enter-to,
+.fade-button-leave-from {
+  opacity: 1;
 }
 
 .animate {

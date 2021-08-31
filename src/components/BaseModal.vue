@@ -1,6 +1,6 @@
 <template>
   <div class="backdrop" @click="$emit('close')"></div>
-  <dialog open>
+  <dialog class="" open>
     <slot></slot>
   </dialog>
 </template>
@@ -34,5 +34,21 @@ dialog {
   background-color: white;
   z-index: 100;
   border: none;
+  animation: modal 0.6s ease-out forwards;
+}
+
+@keyframes modal {
+  /* if you are defining two states you can replace the 0% with "from" 
+  and 100% with "to" */
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+
+  }
 }
 </style>

@@ -9,8 +9,9 @@
     <!-- the after-enter is equivalent to finish  -->
     <!-- the leave equivalent to active  -->
     <!-- the after-leave is equivalent to finish  -->
+    <!-- <transition
+      name="para" -->
     <transition
-      name="para"
       @before-enter="paraBeforeEnter"
       @enter="paraEnter"
       @after-enter="paraAfterEnter"
@@ -66,17 +67,29 @@ export default {
       console.log('beforeLeave');
       console.log(el);
     },
-    paraEnter(el) {
-      console.log('enter');
-      console.log(el);
-    },
     paraAfterEnter(el) {
       console.log('afterEnter');
       console.log(el);
     },
+    // done will tell the other animation's hooks to wait till this one finsih 
+    paraEnter(el,done) {
+      // console.log('enter');
+      // console.log(el);
+      let round = 1
+      const myInterval = setInterval(function(){
+        el.style.opacity = round * 0.01;
+        round++
+        if(round > 100){
+          clearInterval(myInterval)
+          done()
+        }
+      },20)
+
+    },
     paraBeforeEnter(el) {
-      console.log('beforeEnter');
-      console.log(el);
+      // console.log('beforeEnter');
+      // console.log(el);
+      el.style.opacity = 0;
     },
     showUsers() {
       this.usersAreVisible = true;

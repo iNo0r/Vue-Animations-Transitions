@@ -1,21 +1,11 @@
 <template>
   <div class="container">
-    <!-- to annimate the block whenever animateBlock is true -->
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <!-- the enter equivalent to active  -->
-    <!-- the after-enter is equivalent to finish  -->
-    <!-- the leave equivalent to active  -->
-    <!-- the after-leave is equivalent to finish  -->
-    <!-- <transition
-      name="para" -->
-      <!-- by using :css="false" will not use css, the enitre transition will be manged by js,
-       and vue will bother to check css to run this transition, 
-       and it does improve the performance a little bit   -->
     <transition
-    :css="false"
+      :css="false"
       @before-enter="paraBeforeEnter"
       @enter="paraEnter"
       @after-enter="paraAfterEnter"
@@ -30,17 +20,11 @@
     <button @click="toggleParagraph">Toggle Paragrapho</button>
   </div>
   <div class="container">
-    <!-- we ad the mode to prevent showing ugly transitoin when 2 elements 
-    animating at the same time  -->
     <transition name="fade-button" mode="out-in">
       <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
-      <!-- we added v-else here to notify vue that we only using one child inside 
-      of a Transistion component -->
       <button @click="hideUsers" v-else>Hide Users</button>
     </transition>
   </div>
-  <!-- it is important that the content of the an element is the one is not visible, 
-  if the <transistion> itslef is not visble the effect wont work -->
   <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -79,8 +63,6 @@ export default {
       console.log('Leave');
       console.log(el);
       let round = 100;
-      // we stored the interval in data comonent so we can access it in case of
-      // the animation is interrupted so we stop the animation
       this.leaveInterval = setInterval(() => {
         el.style.opacity = round * 0.01;
         round--;
@@ -93,20 +75,14 @@ export default {
     paraBeforeLeave(el) {
       console.log('beforeLeave');
       console.log(el);
-      // just to make sure that the leave animation will start at opacity of 1
       el.style.opacity = 1;
     },
     paraAfterEnter(el) {
       console.log('afterEnter');
       console.log(el);
     },
-    // done will tell the other animation's hooks to wait till this one finsih
     paraEnter(el, done) {
-      // console.log('enter');
-      // console.log(el);
       let round = 1;
-      // we stored the interval in data comonent so we can access it in case of
-      // the animation is interrupted so we stop the animation
       this.enterInterval = setInterval(() => {
         el.style.opacity = round * 0.01;
         round++;
@@ -117,8 +93,6 @@ export default {
       }, 20);
     },
     paraBeforeEnter(el) {
-      // console.log('beforeEnter');
-      // console.log(el);
       el.style.opacity = 0;
     },
     showUsers() {
@@ -201,13 +175,10 @@ button:active {
 }
 
 .animate {
-  /* here we refer to the css keyframe set name, which is slide-fade */
-  /* if we dont add "forwards" it will it will not freeze at at last animation point */
   animation: slide-fade 0.3s ease-out forwards;
 }
 
 .para-enter-active {
-  /* binding it with keyframes  */
   animation: slide-fade 0.3s ease-out;
 }
 
@@ -215,14 +186,10 @@ button:active {
   animation: slide-fade 0.3s ease-out;
 }
 
-/* slide-name is just a name, you can change it */
 @keyframes slide-fade {
-  /* at 0 of animation time  */
   0% {
     transform: translateX(0px) scale(1);
   }
-  /* at 70% of animation time  */
-  /* scale(1.1) means 10% bigger */
   70% {
     transform: translateX(-120px) scale(1.1);
   }

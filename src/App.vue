@@ -11,7 +11,11 @@
     <!-- the after-leave is equivalent to finish  -->
     <!-- <transition
       name="para" -->
+      <!-- by using :css="false" will not use css, the enitre transition will be manged by js,
+       and vue will bother to check css to run this transition, 
+       and it does improve the performance a little bit   -->
     <transition
+    :css="false"
       @before-enter="paraBeforeEnter"
       @enter="paraEnter"
       @after-enter="paraAfterEnter"

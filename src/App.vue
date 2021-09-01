@@ -59,32 +59,42 @@ export default {
       console.log('afterLeave');
       console.log(el);
     },
-    paraLeave(el) {
+    paraLeave(el, done) {
       console.log('Leave');
       console.log(el);
+      let round = 100;
+      const myInterval = setInterval(function() {
+        el.style.opacity = round * 0.01;
+        round--;
+        if (round < 0) {
+          clearInterval(myInterval);
+          done();
+        }
+      }, 20);
     },
     paraBeforeLeave(el) {
       console.log('beforeLeave');
       console.log(el);
+      // just to make sure that the leave animation will start at opacity of 1
+      el.style.opacity = 1;
     },
     paraAfterEnter(el) {
       console.log('afterEnter');
       console.log(el);
     },
-    // done will tell the other animation's hooks to wait till this one finsih 
-    paraEnter(el,done) {
+    // done will tell the other animation's hooks to wait till this one finsih
+    paraEnter(el, done) {
       // console.log('enter');
       // console.log(el);
-      let round = 1
-      const myInterval = setInterval(function(){
+      let round = 1;
+      const myInterval = setInterval(function() {
         el.style.opacity = round * 0.01;
-        round++
-        if(round > 100){
-          clearInterval(myInterval)
-          done()
+        round++;
+        if (round > 100) {
+          clearInterval(myInterval);
+          done();
         }
-      },20)
-
+      }, 20);
     },
     paraBeforeEnter(el) {
       // console.log('beforeEnter');

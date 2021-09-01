@@ -18,6 +18,8 @@
       @before-leave="paraBeforeLeave"
       @leave="paraLeave"
       @after-leave="paraAfterLeave"
+      @enter-cancelled="paraEnterCancelled"
+      @leave-cancelled="paraLeaveCancelled"
     >
       <p v-if="paraIsVisible">the is only sometimes visible.</p>
     </transition>
@@ -51,10 +53,20 @@ export default {
       dialogIsVisible: false,
       animatedBlock: false,
       paraIsVisible: false,
-      usersAreVisible: false
+      usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     };
   },
   methods: {
+    paraLeaveCancelled(el) {
+      console.log(el);
+      clearInterval(this.leaveInterval);
+    },
+    paraEnterCancelled(el) {
+      console.log(el);
+      clearInterval(this.enterInterval);
+    },
     paraAfterLeave(el) {
       console.log('afterLeave');
       console.log(el);
@@ -63,11 +75,13 @@ export default {
       console.log('Leave');
       console.log(el);
       let round = 100;
-      const myInterval = setInterval(function() {
+      // we stored the interval in data comonent so we can access it in case of
+      // the animation is interrupted so we stop the animation
+      this.leaveInterval = setInterval(() => {
         el.style.opacity = round * 0.01;
         round--;
         if (round < 0) {
-          clearInterval(myInterval);
+          clearInterval(this.leaveInterval);
           done();
         }
       }, 20);
@@ -87,11 +101,13 @@ export default {
       // console.log('enter');
       // console.log(el);
       let round = 1;
-      const myInterval = setInterval(function() {
+      // we stored the interval in data comonent so we can access it in case of
+      // the animation is interrupted so we stop the animation
+      this.enterInterval = setInterval(() => {
         el.style.opacity = round * 0.01;
         round++;
         if (round > 100) {
-          clearInterval(myInterval);
+          clearInterval(this.enterInterval);
           done();
         }
       }, 20);

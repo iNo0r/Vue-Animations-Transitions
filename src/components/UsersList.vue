@@ -58,6 +58,9 @@ li {
 .user-list-leave-active {
   /* to watch for changes in all css properties, for example "transform"  */
   transition: all 1s ease-in;
+  /* animation works properly when entering new item but not at item leaving, */
+  /* we have to ad position absoulte */
+  position: absolute;
 }
 .user-list-enter-to,
 .uawe-list-leave-from {
@@ -68,5 +71,11 @@ li {
 .user-list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+/* to control the sanppy move of the other items while assing or deleting an item  */
+/* to be notted Vue will use trasnform under the hood  */
+.user-list-move {
+  transition: transform 0.5s ease;
 }
 </style>

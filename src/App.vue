@@ -1,5 +1,8 @@
 <template>
-<div class="container">
+  <div>
+    <router-view></router-view>
+  </div>
+  <!-- <div class="container">
   <users-list></users-list>
 </div>
   <div class="container">
@@ -34,15 +37,15 @@
   </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import UsersList from './components/UsersList.vue'
+// import UsersList from './components/UsersList.vue'
 export default {
-  components:{
-    UsersList : UsersList
-  },
+  // components:{
+  //   UsersList : UsersList
+  // },
   data() {
     return {
       dialogIsVisible: false,

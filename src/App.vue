@@ -1,6 +1,10 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view v-slot="slotProps">
+      <transition name="route" mode="out-in">
+        <component :is="slotProps.Component"/>
+         </transition>
+    </router-view>
   </div>
   <!-- <div class="container">
   <users-list></users-list>
@@ -195,16 +199,33 @@ button:active {
 .para-leave-active {
   animation: slide-fade 0.3s ease-out;
 }
-
-@keyframes slide-fade {
+.route-enter-active {
+  /* animation: slide-fade 1s ease-out reverse; */
+  animation: slide-fade-in 1s ease-out ;
+}
+.route-leave-active {
+  animation: slide-fade-out 1s ease-in ;
+}
+@keyframes slide-fade-in {
+  0% {
+    transform: translateX(-250px) scale(1);
+  }
+  70% {
+    transform: translateX(-200px) scale(1.1);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+@keyframes slide-fade-out {
   0% {
     transform: translateX(0px) scale(1);
   }
   70% {
-    transform: translateX(-120px) scale(1.1);
+    transform: translateX(200px) scale(1.1);
   }
   100% {
-    transform: translateX(-150px) scale(1);
+    transform: translateX(250px) scale(1);
   }
 }
 </style>

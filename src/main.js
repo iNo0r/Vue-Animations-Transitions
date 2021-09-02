@@ -24,4 +24,7 @@ const router = createRouter({
   ]
 });
 app.use(router);
-app.mount('#app');
+// to avoind intial animation at routing , check course 204
+router.isReady().then(() => {
+  app.mount('#app');
+});
